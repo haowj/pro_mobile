@@ -15,7 +15,7 @@ class ProgramHandler(BaseHandler):
 		data = self.get_arguments('data')
 		wsd = list()
 		dic_file = dict()
-		for i in data:
+		for i in json.loads(data):
 			list_file = i.split('|')
 			print(list_file)
 			if list_file[0] not in dic_file.keys():

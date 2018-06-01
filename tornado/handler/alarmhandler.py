@@ -15,7 +15,7 @@ class AlarmHandler(BaseHandler):
 		data = self.get_arguments('data')
 		wsd = list()
 		dic_file = dict()
-		for i in data:
+		for i in json.loads(data):
 			list_file = i.split('|')
 			if list_file[0] not in dic_file.keys():
 				dic_file[list_file[0]] = [list_file[1]]
