@@ -24,12 +24,11 @@ class InfoHandler(BaseHandler):
 				tmp_val_ls.append(list_file[1])
 				dic_file.update({list_file[0]: tmp_val_ls})
 		for i in dic_file.items():
-			path = r'E:\数据\%s\%s\INFO' % (city, date)
+			path = '/data/cleandata/%s/%s/INFO' % (city, date)
 			fh = os.path.join(path, i[0])
 			if os.path.isfile(fh):
 				with open(fh) as fin:
 					afin = fin.readlines()
 					for idtext in i[1]:
 						wsd.append(afin[idtext])
-
 		self.write(json.dumps(wsd))

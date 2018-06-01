@@ -1,0 +1,26 @@
+2018-06-01 18:07:20,211 - __main__ - INFO - Server starting...
+Traceback (most recent call last):
+  File "/home/cmcc/pro_mobile/tornado/app.py", line 35, in <module>
+    main()
+  File "/home/cmcc/pro_mobile/tornado/app.py", line 27, in main
+    http_server = tornado.httpserver.HTTPServer(Application())
+  File "/home/cmcc/pro_mobile/tornado/app.py", line 23, in __init__
+    tornado.web.Application.__init__(self, handlers, **tornado_settings)
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/web.py", line 1953, in __init__
+    self.wildcard_router = _ApplicationRouter(self, handlers)
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/web.py", line 1816, in __init__
+    super(_ApplicationRouter, self).__init__(rules)
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 379, in __init__
+    super(ReversibleRuleRouter, self).__init__(rules)
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 304, in __init__
+    self.add_rules(rules)
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 316, in add_rules
+    rule = Rule(PathMatches(rule[0]), *rule[1:])
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 429, in __init__
+    target = import_object(target)
+  File "/usr/local/python3/lib/python3.5/site-packages/tornado/util.py", line 181, in import_object
+    obj = __import__('.'.join(parts[:-1]), None, None, [parts[-1]], 0)
+  File "/home/cmcc/pro_mobile/tornado/handler/prinfohandler.py", line 28
+    print(path)
+              ^
+IndentationError: unindent does not match any outer indentation level

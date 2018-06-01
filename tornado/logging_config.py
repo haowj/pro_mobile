@@ -14,7 +14,7 @@ config = {
 		},
 		'rotating_time': {
 			'class': 'logging.handlers.TimedRotatingFileHandler',
-			'filename': r'E:\log\logging.log',
+			'filename': '/tmp/logging.log',
 			'when': 'd',
 			'formatter': 'simple'
 		}
