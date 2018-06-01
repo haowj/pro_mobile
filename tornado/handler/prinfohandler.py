@@ -17,6 +17,7 @@ class ProgramHandler(BaseHandler):
 		dic_file = dict()
 		for i in data:
 			list_file = i.split('|')
+			print(list_file)
 			if list_file[0] not in dic_file.keys():
 				dic_file[list_file[0]] = [list_file[1]]
 			else:
@@ -25,7 +26,7 @@ class ProgramHandler(BaseHandler):
 				dic_file.update({list_file[0]: tmp_val_ls})
 		for i in dic_file.items():
 			path = '/data/cleandata/%s/%s/PROGRAMINFO' % (city, date)
-            print(path)
+			print(path)
 			fh = os.path.join(path, i[0])
 			if os.path.isfile(fh):
 				with open(fh) as fin:
