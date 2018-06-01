@@ -1,4 +1,4 @@
-# !/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import tornado.httpserver
 import tornado.ioloop
@@ -15,7 +15,10 @@ logging.config.dictConfig(logging_config.config)
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
-			(r'/alarm', 'handler.alarmhandler.AlarmHandler')
+			(r'/alarm', 'handler.alarmhandler.AlarmHandler'),
+			(r'/info', 'handler.infohandler.InfoHandler'),
+			(r'/periodic', 'handler.periodichandler.PeriodicHandler'),
+			(r'/program', 'handler.prinfohandler.ProgramHandler')
 		]
 		tornado.web.Application.__init__(self, handlers, **tornado_settings)
 

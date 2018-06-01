@@ -5,7 +5,7 @@ import os
 from handler.base import BaseHandler
 
 
-class AlarmHandler(BaseHandler):
+class ProgramHandler(BaseHandler):
 	def get(self):
 		pass
 
@@ -24,7 +24,7 @@ class AlarmHandler(BaseHandler):
 				tmp_val_ls.append(list_file[1])
 				dic_file.update({list_file[0]: tmp_val_ls})
 		for i in dic_file.items():
-			path = r'E:\数据\%s\%s\ALARM' % (city, date)
+			path = r'E:\数据\%s\%s\PROGRAMINFO' % (city, date)
 			fh = os.path.join(path, i[0])
 			if os.path.isfile(fh):
 				with open(fh) as fin:

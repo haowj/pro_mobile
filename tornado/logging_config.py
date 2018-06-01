@@ -1,5 +1,3 @@
-# !/usr/bin/env python3
-# -*- coding: utf-8 -*-
 config = {
 	'disable_existing_loggers': False,
 	'version': 1,
