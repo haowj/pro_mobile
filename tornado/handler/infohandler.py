@@ -30,5 +30,5 @@ class InfoHandler(BaseHandler):
 				with open(fh) as fin:
 					afin = fin.readlines()
 					for idtext in i[1]:
-						wsd.append(afin[idtext])
+						wsd.append(afin[int(idtext)].rstrip('\n'))
 		self.write(json.dumps(wsd))
