@@ -10,9 +10,9 @@ class PeriodicHandler(BaseHandler):
 		pass
 
 	def post(self):
-		city = self.get_arguments('city')
-		date = self.get_arguments('date')
-		data = self.get_arguments('data')
+		city = self.get_argument('city')
+		date = self.get_argument('date')
+		data = self.get_argument('data')
 		wsd = list()
 		dic_file = dict()
 		for i in json.loads(data):
