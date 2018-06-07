@@ -1,26 +1,42 @@
-2018-06-01 18:07:20,211 - __main__ - INFO - Server starting...
-Traceback (most recent call last):
-  File "/home/cmcc/pro_mobile/tornado/app.py", line 35, in <module>
-    main()
-  File "/home/cmcc/pro_mobile/tornado/app.py", line 27, in main
-    http_server = tornado.httpserver.HTTPServer(Application())
-  File "/home/cmcc/pro_mobile/tornado/app.py", line 23, in __init__
-    tornado.web.Application.__init__(self, handlers, **tornado_settings)
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/web.py", line 1953, in __init__
-    self.wildcard_router = _ApplicationRouter(self, handlers)
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/web.py", line 1816, in __init__
-    super(_ApplicationRouter, self).__init__(rules)
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 379, in __init__
-    super(ReversibleRuleRouter, self).__init__(rules)
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 304, in __init__
-    self.add_rules(rules)
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 316, in add_rules
-    rule = Rule(PathMatches(rule[0]), *rule[1:])
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/routing.py", line 429, in __init__
-    target = import_object(target)
-  File "/usr/local/python3/lib/python3.5/site-packages/tornado/util.py", line 181, in import_object
-    obj = __import__('.'.join(parts[:-1]), None, None, [parts[-1]], 0)
-  File "/home/cmcc/pro_mobile/tornado/handler/prinfohandler.py", line 28
-    print(path)
-              ^
-IndentationError: unindent does not match any outer indentation level
+2018-06-04 16:32:34,383 - __main__ - INFO - Server starting...
+2018-06-04 16:32:34,403 - asyncio - DEBUG - Using selector: EpollSelector
+2018-06-04 16:32:44,804 - tornado.access - INFO - 200 POST /program (192.168.111.2) 1492.41ms
+2018-06-06 10:35:42,825 - tornado.access - INFO - 200 GET /periodic (192.168.111.2) 1.20ms
+2018-06-06 10:36:03,003 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 6873.93ms
+2018-06-06 10:46:18,219 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3176.11ms
+2018-06-06 10:54:15,792 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3039.44ms
+2018-06-06 11:01:05,676 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3112.47ms
+2018-06-06 11:01:27,695 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3102.41ms
+2018-06-06 11:10:29,273 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3100.32ms
+2018-06-06 11:18:42,371 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 2993.06ms
+2018-06-06 11:20:26,924 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3212.62ms
+2018-06-06 11:30:16,045 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3050.82ms
+2018-06-06 11:32:43,933 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 2979.60ms
+2018-06-06 11:56:29,340 - tornado.access - INFO - 200 POST /info (192.168.111.2) 162.25ms
+2018-06-06 11:59:06,954 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 10414.30ms
+2018-06-06 11:59:17,264 - tornado.access - INFO - 200 POST /info (192.168.111.2) 73.81ms
+2018-06-06 11:59:30,757 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 1.04ms
+2018-06-06 11:59:40,163 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.88ms
+2018-06-06 11:59:48,279 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.88ms
+2018-06-06 11:59:50,970 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 0.84ms
+2018-06-06 11:59:58,344 - tornado.access - INFO - 200 POST /info (192.168.111.2) 41.22ms
+2018-06-06 12:06:35,439 - tornado.access - INFO - 200 POST /info (192.168.111.2) 24.11ms
+2018-06-06 12:06:53,263 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 1.20ms
+2018-06-06 12:08:10,693 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 1.14ms
+2018-06-06 12:08:14,166 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 0.78ms
+2018-06-06 12:08:15,973 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 0.71ms
+2018-06-06 12:08:18,186 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 0.71ms
+2018-06-06 12:08:20,191 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 0.70ms
+2018-06-06 12:08:22,043 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.68ms
+2018-06-06 12:08:24,915 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.68ms
+2018-06-06 12:08:26,864 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.69ms
+2018-06-06 12:08:29,087 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.72ms
+2018-06-06 12:08:31,351 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.81ms
+2018-06-06 12:12:47,997 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 5295.25ms
+2018-06-06 13:59:21,379 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3097.73ms
+2018-06-06 13:59:24,199 - tornado.access - INFO - 200 POST /info (192.168.111.2) 39.44ms
+2018-06-06 13:59:28,585 - tornado.access - INFO - 200 POST /alarm (192.168.111.2) 2.54ms
+2018-06-06 13:59:30,906 - tornado.access - INFO - 200 POST /program (192.168.111.2) 0.78ms
+2018-06-06 13:59:37,257 - tornado.access - INFO - 200 POST /info (192.168.111.2) 32.72ms
+2018-06-06 13:59:43,693 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3257.56ms
+2018-06-06 14:23:48,695 - tornado.access - INFO - 200 POST /periodic (192.168.111.2) 3085.45ms
