@@ -28,7 +28,9 @@ class PeriodicHandler(BaseHandler):
 			fh = os.path.join(path, i[0])
 			if os.path.isfile(fh):
 				with open(fh) as fin:
-					afin = fin.readlines()
 					for idtext in i[1]:
-						wsd.append(afin[int(idtext)].rstrip('\n'))
+						afin = fin
+						for dsb in range(int(idtext)):
+							d_v_s = next(afin)
+						wsd.append(d_v_s.rstrip('\n'))
 		self.write(json.dumps(wsd))
