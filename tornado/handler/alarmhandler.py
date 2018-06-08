@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 import os
+import threading
 from handler.base import BaseHandler
 
 
@@ -9,26 +10,42 @@ class AlarmHandler(BaseHandler):
 	def get(self):
 		pass
 
+	
 	def post(self):
 		city = self.get_argument('city')
 		date = self.get_argument('date')
 		data = self.get_argument('data')
 		wsd = list()
+		fun_name_list = list()
 		dic_file = dict()
+		path = '/data/cleandata/%s/%s/ALARM' % (city, date)
 		for i in json.loads(data):
 			list_file = i.split('|')
 			if list_file[0] not in dic_file.keys():
-				dic_file[list_file[0]] = [list_file[1]]
+				dic_file[list_file[0]] = [[list_file[1], list_file[2]]]
 			else:
 				tmp_val_ls = dic_file[list_file[0]]
-				tmp_val_ls.append(list_file[1])
+				tmp_val_ls.append([list_file[1], list_file[2]])
 				dic_file.update({list_file[0]: tmp_val_ls})
-		for i in dic_file.items():
-			path = '/data/cleandata/%s/%s/ALARM' % (city, date)
-			fh = os.path.join(path, i[0])
+		
+		def read_file_threa(file_name,value_list):
+			nonlocal wsd
+			fh = os.path.join(path, file_name)
 			if os.path.isfile(fh):
-				with open(fh) as fin:
-					afin = fin.readlines()
-					for idtext in i[1]:
-						wsd.append(afin[int(idtext)].rstrip('\n'))
+				with open(fh, 'rb') as fin:
+					for i in value_list:
+						fin.seek(int(i[0]))
+						try:
+							wsd.append(fin.read(int(i[1])).decode(encoding='utf-8'))
+						except UnicodeDecodeError:
+							wsd.append(fin.read(int(i[1])).decode(encoding='gbk'))
+						
+		for key, values in dic_file.items():
+			key = threading.Thread(target=read_file_threa, args=(key, values,))
+			fun_name_list.append(key)
+			
+		for i in fun_name_list:
+			i.start()
+		for i in fun_name_list:
+			i.join()
 		self.write(json.dumps(wsd))
