@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     threads = []
     starttime = time.clock()
-    for i in range(0, 20):
+    for i in range(0, 80):
         thread = SyncopateTools(i)
         threads.append(thread)
     for t in threads:
