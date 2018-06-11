@@ -15,6 +15,7 @@ class ProgramHandler(BaseHandler):
 		date = self.get_argument('date')
 		data = self.get_argument('data')
 		wsd = list()
+		date = date.replace('-','')
 		fun_name_list = list()
 		dic_file = dict()
 		path = '/data/cleandata/%s/%s/PROGRAMINFO' % (city, date)
