@@ -24,8 +24,13 @@ class SyncopateTools(threading.Thread):
         global fq
         fo = open(os.path.join(wp, self.name), 'ab')
         while not fq.empty():
-            for line in fq.get():
-                fo.write(line)
+            try:
+				with gzip.open(fq.get(), 'rb') as fin:
+					for line in fin:
+						fo.write(line)
+					fin.close()
+			except EOFError:
+				pass
         fo.close()
 
 

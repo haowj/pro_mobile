@@ -33,7 +33,7 @@ class CommonTool:
             if filename_list[i][-2:] == 'gz':
                 path = os.path.join(self.catalog, filename_list[i])
                 if os.path.isfile(path):
-                    self.equipment.put(self.__read_log_file(path))
+                    self.equipment.put(path)
         return self.equipment
 
     def __get_summary_file(self):
