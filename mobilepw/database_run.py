@@ -33,8 +33,8 @@ else:
 
 pic_ph = '/data/rowdata/%s/%s/PERIODIC/sn_list' % (city, date)
 if os.path.isfile(pic_ph):
-    pic = open(pic_ph, 'r')
-    PERIODIC = pic.readlines()
+    PERIODIC = open(pic_ph, 'r')
+    
 else:
     PERIODIC = dict()
 
