@@ -45,11 +45,11 @@ class ReckonFramework:
 						                 'city': ditn[2],
 						                 'cpname': ditn[33],
 						                 'asmd': ditn[30],
-						                 'pcfile': [i + '|' + str(con) + '|' + str(count_read - 1)]}
+						                 'pcfile': [i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ','')]}
 						con += count_read
 					else:
 						fid = sn_r[ditn[3]]['pcfile']
-						fid.append(i + '|' + str(con) + '|' + str(count_read - 1))
+						fid.append(i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ',''))
 						sn_r[ditn[3]].update({'pcfile': fid})
 						sn_r[ditn[3]].update({'pc': sn_r[ditn[3]]['pc'] + int(ditn[10])})
 						sn_r[ditn[3]].update({'psc': sn_r[ditn[3]]['psc'] + int(ditn[11])})
@@ -73,11 +73,11 @@ class ReckonFramework:
 						ditn = dl.decode(encoding='gbk').rstrip('\n').split('|')
 
 					if ditn[3] not in infodic.keys():
-						infodic[ditn[3]] = [i + '|' + str(con) + '|' + str(count_read - 1)]
+						infodic[ditn[3]] = [i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ','')]
 						con += count_read
 					else:
 						fid = infodic[ditn[3]]
-						fid.append(i + '|' + str(con) + '|' + str(count_read - 1))
+						fid.append(i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ',''))
 						infodic.update({ditn[3]: fid})
 						con += count_read
 			fo.close()
@@ -95,11 +95,11 @@ class ReckonFramework:
 					except UnicodeDecodeError:
 						ditn = dl.decode(encoding='gbk').rstrip('\n').split('|')
 					if ditn[5] not in infodic.keys():
-						infodic[ditn[5]] = [i + '|' + str(con) + '|' + str(count_read - 1)]
+						infodic[ditn[5]] = [i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ','')]
 						con += count_read
 					else:
 						fid = infodic[ditn[5]]
-						fid.append(i + '|' + str(con) + '|' + str(count_read - 1))
+						fid.append(i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ',''))
 						infodic.update({ditn[5]: fid})
 						con += count_read
 			fo.close()
@@ -136,11 +136,11 @@ class ReckonFramework:
 						infodic[ditn[3]] = {'st': int(ditn[7]),
 						                    'pt': int(ditn[11]),
 						                    'plurl': ditn[9],
-						                    'aifile': [i + '|' + str(con) + '|' + str(count_read - 1)]}
+						                    'aifile': [i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ','')]}
 						con += count_read
 					else:
 						fid = infodic[ditn[3]]['aifile']
-						fid.append(i + '|' + str(con) + '|' + str(count_read - 1))
+						fid.append(i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ',''))
 						infodic[ditn[3]].update({'aifile': fid})
 						infodic[ditn[3]].update({'st': infodic[ditn[3]]['st'] + int(ditn[7])})
 						infodic[ditn[3]].update({'pt': infodic[ditn[3]]['pt'] + int(ditn[11])})
