@@ -12,22 +12,22 @@ st = time.clock()
 pio_ph = '/data/rowdata/%s/%s/PROGRAMINFO/sn_list' % (city, date)
 
 if os.path.isfile(pio_ph):
-    pio = open(pio_ph, 'r')
-    PROGRAMINFO = pio.readlines()
+    PROGRAMINFO = open(pio_ph, 'r')
+   
 else:
     PROGRAMINFO = dict()
 
 ios_ph = '/data/rowdata/%s/%s/INFO/sn_list' % (city, date)
 if os.path.isfile(ios_ph):
-    ios = open(ios_ph, 'r')
-    INFO = ios.readlines()
+    INFO = open(ios_ph, 'r')
+    
 else:
     INFO = dict()
 
 alm_ph = '/data/rowdata/%s/%s/ALARM/sn_list' % (city, date)
 if os.path.isfile(alm_ph):
-    alm = open(alm_ph, 'r')
-    ALARM = alm.readlines()
+    ALARM = open(alm_ph, 'r')
+
 else:
     ALARM = dict()
 
