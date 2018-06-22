@@ -118,32 +118,35 @@ class ReckonFramework:
 					except UnicodeDecodeError:
 						ditn = dl.decode(encoding='gbk').rstrip('\n').split('|')
 						s_file = re.search('\|([a-zA-Z]{2,8}:\/\/.*?)\|([0-9]{10}|[0-9]{13})\|([0-9]*)', dl.decode(encoding='gbk'))
-					if ditn[7] == '':
-						ditn[7] = 0
-					if s_file:
-						ditn[9] = s_file.group(1)
-						if s_file.group(3) == '':
-							ditn[11] = 0
+					try:
+						if ditn[7] == '':
+							ditn[7] = 0
+						if s_file:
+							ditn[9] = s_file.group(1)
+							if s_file.group(3) == '':
+								ditn[11] = 0
+							else:
+								ditn[11] = int(s_file.group(3))
 						else:
-							ditn[11] = int(s_file.group(3))
-					else:
-						if ditn[11] == '':
-							ditn[11] = 0
-						else:
-							ditn[11] = int(ditn[11])
+							if ditn[11] == '':
+								ditn[11] = 0
+							else:
+								ditn[11] = int(ditn[11])
 
-					if ditn[3] not in infodic.keys():
-						infodic[ditn[3]] = {'st': int(ditn[7]),
-						                    'pt': int(ditn[11]),
-						                    'plurl': ditn[9],
-						                    'aifile': [i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ','')]}
-						con += count_read
-					else:
-						fid = infodic[ditn[3]]['aifile']
-						fid.append(i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ',''))
-						infodic[ditn[3]].update({'aifile': fid})
-						infodic[ditn[3]].update({'st': infodic[ditn[3]]['st'] + int(ditn[7])})
-						infodic[ditn[3]].update({'pt': infodic[ditn[3]]['pt'] + int(ditn[11])})
+						if ditn[3] not in infodic.keys():
+							infodic[ditn[3]] = {'st': int(ditn[7]),
+												'pt': int(ditn[11]),
+												'plurl': ditn[9],
+												'aifile': [i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ','')]}
+							con += count_read
+						else:
+							fid = infodic[ditn[3]]['aifile']
+							fid.append(i + '|' + str(con) + '|' + str(count_read - 1) + '|' + ditn[0].replace('-', '').replace(' ',''))
+							infodic[ditn[3]].update({'aifile': fid})
+							infodic[ditn[3]].update({'st': infodic[ditn[3]]['st'] + int(ditn[7])})
+							infodic[ditn[3]].update({'pt': infodic[ditn[3]]['pt'] + int(ditn[11])})
+							con += count_read
+					except BaseException:
 						con += count_read
 			fo.close()
 		return infodic
