@@ -48,4 +48,5 @@ class PeriodicHandler(BaseHandler):
 			i.start()
 		for i in fun_name_list:
 			i.join()
+		wsd.sort(key = lambda x:(re.match('([0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{6})',x).group(1)),reverse = True)
 		self.write(json.dumps(wsd))
