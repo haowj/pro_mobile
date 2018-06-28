@@ -238,6 +238,36 @@ class ValuesInsertData:
 		cursor.close()
 		db.close()
 
+		def insert_user_data(self):
+		db = CommonTool.db_mysql_connect()
+		cursor = db.cursor()
+		sql_c = u"""
+                insert into T_SNUSER_CARTONOCCUPATIONRATIO_DATA (startdate, province, 
+                snuserproportion, Terminalnumber) VALUES 
+                ('%s', '%s', '%s', %s)
+            """
+		sql_e = u"""
+                        insert into T_SNUSER_EPGSUCCESSRATE_DATA (startdate, province, 
+                        snuserproportion, Terminalnumber) VALUES 
+                        ('%s', '%s', '%s', %s)
+                    """
+		sql_s = u"""
+                        insert into T_SNUSER_SUCCESSFULPLAYBACKRATE_DATA (startdate, province, 
+                        snuserproportion, Terminalnumber) VALUES 
+                        ('%s', '%s', '%s', %s)
+                    """
+
+		for i in self.__user_data().items():
+			if i[0] == 'st':
+				cursor.execute(sql_c % (self.date, self.city, i[1].keys(), i[1].values()))
+			elif i[0] == 'ert':
+				cursor.execute(sql_e % (self.date, self.city, i[1].keys(), i[1].values()))
+			else:
+				cursor.execute(sql_s % (self.date, self.city, i[1].keys(), i[1].values()))
+			db.commit()
+		cursor.close()
+		db.close()
+
 	def __city_data(self):
 		sn_city = dict()
 		con = 1
@@ -345,3 +375,124 @@ class ValuesInsertData:
 				sn_city[i[1]['asmd']].update({'et': sn_city[i[1]['asmd']]['et'] + i[1]['et']})
 
 		return sn_city
+
+	def __user_data(self):
+		"""
+		pc:总播放次数
+		psc:成功播放次数
+		et:egp请求总次数
+		ert:egp请求成功次数
+		st:卡顿总时长
+		pt:播放总时长
+
+		1-10
+		11-20
+		21-30
+		31-40
+		41-50
+		51-60
+		61-70
+		71-80
+		81-90
+		91-100
+		null
+
+		:return: {type:{name:1-100, nu:100}}
+		"""
+		sn_city = dict()
+		sn_city['psc'] = dict()
+		sn_city['ert'] = dict()
+		sn_city['st'] = dict()
+
+		con = 1
+		for i in self.data.items():
+			if i[1]['psc'] == 0:
+				ns_na = 'null'
+			else:
+				if 0 < i[1]['psc'] / i[1]['pc'] >= 0.1:
+					ns_na = '0%-10%'
+				elif 0.1 < i[1]['psc'] / i[1]['pc'] >= 0.2:
+					ns_na = '10%-20%'
+				elif 0.2 < i[1]['psc'] / i[1]['pc'] >= 0.3:
+					ns_na = '20%-30%'
+				elif 0.3 < i[1]['psc'] / i[1]['pc'] >= 0.4:
+					ns_na = '30%-40%'
+				elif 0.4 < i[1]['psc'] / i[1]['pc'] >= 0.5:
+					ns_na = '40%-50%'
+				elif 0.5 < i[1]['psc'] / i[1]['pc'] >= 0.6:
+					ns_na = '50%-60%'
+				elif 0.6 < i[1]['psc'] / i[1]['pc'] >= 0.7:
+					ns_na = '60%-70%'
+				elif 0.7 < i[1]['psc'] / i[1]['pc'] >= 0.8:
+					ns_na = '70%-80%'
+				elif 0.8 < i[1]['psc'] / i[1]['pc'] >= 0.9:
+					ns_na = '80%-90%'
+				else:
+					ns_na = '90%-100%'
+			if ns_na not in sn_city['psc'].keys():
+				sn_city['psc'][ns_na] = con
+			else:
+				ct = sn_city['psc'][ns_na]
+				sn_city['psc'].update({ns_na: ct + 1})
+
+			if i[1]['ert'] == 0:
+				ns_na = 'null'
+			else:
+				if 0 < i[1]['ert'] / i[1]['et'] >= 0.1:
+					ns_na = '0%-10%'
+				elif 0.1 < i[1]['ert'] / i[1]['et'] >= 0.2:
+					ns_na = '10%-20%'
+				elif 0.2 < i[1]['ert'] / i[1]['et'] >= 0.3:
+					ns_na = '20%-30%'
+				elif 0.3 < i[1]['ert'] / i[1]['et'] >= 0.4:
+					ns_na = '30%-40%'
+				elif 0.4 < i[1]['ert'] / i[1]['et'] >= 0.5:
+					ns_na = '40%-50%'
+				elif 0.5 < i[1]['ert'] / i[1]['et'] >= 0.6:
+					ns_na = '50%-60%'
+				elif 0.6 < i[1]['ert'] / i[1]['et'] >= 0.7:
+					ns_na = '60%-70%'
+				elif 0.7 < i[1]['ert'] / i[1]['et'] >= 0.8:
+					ns_na = '70%-80%'
+				elif 0.8 < i[1]['ert'] / i[1]['et'] >= 0.9:
+					ns_na = '80%-90%'
+				else:
+					ns_na = '90%-100%'
+			if ns_na not in sn_city['ert'].keys():
+				sn_city['ert'][ns_na] = con
+			else:
+				ct = sn_city['psc'][ns_na]
+				sn_city['ert'].update({ns_na: ct + 1})
+
+			if i[1]['st'] == 0:
+				ns_na = 'null'
+			else:
+				if 0 < i[1]['st'] / i[1]['pt'] >= 0.1:
+					ns_na = '0%-10%'
+				elif 0.1 < i[1]['st'] / i[1]['pt'] >= 0.2:
+					ns_na = '10%-20%'
+				elif 0.2 < i[1]['st'] / i[1]['pt'] >= 0.3:
+					ns_na = '20%-30%'
+				elif 0.3 < i[1]['st'] / i[1]['pt'] >= 0.4:
+					ns_na = '30%-40%'
+				elif 0.4 < i[1]['st'] / i[1]['pt'] >= 0.5:
+					ns_na = '40%-50%'
+				elif 0.5 < i[1]['st'] / i[1]['pt'] >= 0.6:
+					ns_na = '50%-60%'
+				elif 0.6 < i[1]['st'] / i[1]['pt'] >= 0.7:
+					ns_na = '60%-70%'
+				elif 0.7 < i[1]['st'] / i[1]['pt'] >= 0.8:
+					ns_na = '70%-80%'
+				elif 0.8 < i[1]['st'] / i[1]['pt'] >= 0.9:
+					ns_na = '80%-90%'
+				else:
+					ns_na = '90%-100%'
+
+			if ns_na not in sn_city['st'].keys():
+				sn_city['st'][ns_na] = con
+			else:
+				ct = sn_city['st'][ns_na]
+				sn_city['st'].update({ns_na: ct + 1})
+
+		return sn_city
+
