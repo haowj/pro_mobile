@@ -238,7 +238,7 @@ class ValuesInsertData:
 		cursor.close()
 		db.close()
 
-		def insert_user_data(self):
+	def insert_user_data(self):
 		db = CommonTool.db_mysql_connect()
 		cursor = db.cursor()
 		sql_c = u"""
