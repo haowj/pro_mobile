@@ -259,11 +259,14 @@ class ValuesInsertData:
 
 		for i in self.__user_data().items():
 			if i[0] == 'st':
-				cursor.execute(sql_c % (self.date, self.city, i[1].keys(), i[1].values()))
+				for key, value in i[1]:
+					cursor.execute(sql_c % (self.date, self.city, key, value))
 			elif i[0] == 'ert':
-				cursor.execute(sql_e % (self.date, self.city, i[1].keys(), i[1].values()))
+				for key ,value in i[1]:
+					cursor.execute(sql_e % (self.date, self.city, key, value))
 			else:
-				cursor.execute(sql_s % (self.date, self.city, i[1].keys(), i[1].values()))
+				for key, value in i[1]:
+					cursor.execute(sql_s % (self.date, self.city, key, value))
 			db.commit()
 		cursor.close()
 		db.close()
@@ -406,88 +409,93 @@ class ValuesInsertData:
 
 		con = 1
 		for i in self.data.items():
-			if i[1]['psc'] == 0:
-				ns_na = 'null'
+			if 0 <= i[1]['psc'] / i[1]['pc'] >= 0.1:
+				ns_na = '0%-10%'
+			elif 0.1 < i[1]['psc'] / i[1]['pc'] >= 0.2:
+				ns_na = '10%-20%'
+			elif 0.2 < i[1]['psc'] / i[1]['pc'] >= 0.3:
+				ns_na = '20%-30%'
+			elif 0.3 < i[1]['psc'] / i[1]['pc'] >= 0.4:
+				ns_na = '30%-40%'
+			elif 0.4 < i[1]['psc'] / i[1]['pc'] >= 0.5:
+				ns_na = '40%-50%'
+			elif 0.5 < i[1]['psc'] / i[1]['pc'] >= 0.6:
+				ns_na = '50%-60%'
+			elif 0.6 < i[1]['psc'] / i[1]['pc'] >= 0.7:
+				ns_na = '60%-70%'
+			elif 0.7 < i[1]['psc'] / i[1]['pc'] >= 0.8:
+				ns_na = '70%-80%'
+			elif 0.8 < i[1]['psc'] / i[1]['pc'] >= 0.9:
+				ns_na = '80%-90%'
+			elif 0.9 < i[1]['psc'] / i[1]['pc'] >= 1:
+				ns_na = '90%-100%'
+			elif 1 < i[1]['psc'] / i[1]['pc']:
+				ns_na = '> 100%'
 			else:
-				if 0 < i[1]['psc'] / i[1]['pc'] >= 0.1:
-					ns_na = '0%-10%'
-				elif 0.1 < i[1]['psc'] / i[1]['pc'] >= 0.2:
-					ns_na = '10%-20%'
-				elif 0.2 < i[1]['psc'] / i[1]['pc'] >= 0.3:
-					ns_na = '20%-30%'
-				elif 0.3 < i[1]['psc'] / i[1]['pc'] >= 0.4:
-					ns_na = '30%-40%'
-				elif 0.4 < i[1]['psc'] / i[1]['pc'] >= 0.5:
-					ns_na = '40%-50%'
-				elif 0.5 < i[1]['psc'] / i[1]['pc'] >= 0.6:
-					ns_na = '50%-60%'
-				elif 0.6 < i[1]['psc'] / i[1]['pc'] >= 0.7:
-					ns_na = '60%-70%'
-				elif 0.7 < i[1]['psc'] / i[1]['pc'] >= 0.8:
-					ns_na = '70%-80%'
-				elif 0.8 < i[1]['psc'] / i[1]['pc'] >= 0.9:
-					ns_na = '80%-90%'
-				else:
-					ns_na = '90%-100%'
+				ns_na = 'null'
+			
 			if ns_na not in sn_city['psc'].keys():
 				sn_city['psc'][ns_na] = con
 			else:
 				ct = sn_city['psc'][ns_na]
 				sn_city['psc'].update({ns_na: ct + 1})
-
-			if i[1]['ert'] == 0:
-				ns_na = 'null'
+			
+			if 0 <= i[1]['ert'] / i[1]['et'] >= 0.1:
+				ns_na = '0%-10%'
+			elif 0.1 < i[1]['ert'] / i[1]['et'] >= 0.2:
+				ns_na = '10%-20%'
+			elif 0.2 < i[1]['ert'] / i[1]['et'] >= 0.3:
+				ns_na = '20%-30%'
+			elif 0.3 < i[1]['ert'] / i[1]['et'] >= 0.4:
+				ns_na = '30%-40%'
+			elif 0.4 < i[1]['ert'] / i[1]['et'] >= 0.5:
+				ns_na = '40%-50%'
+			elif 0.5 < i[1]['ert'] / i[1]['et'] >= 0.6:
+				ns_na = '50%-60%'
+			elif 0.6 < i[1]['ert'] / i[1]['et'] >= 0.7:
+				ns_na = '60%-70%'
+			elif 0.7 < i[1]['ert'] / i[1]['et'] >= 0.8:
+				ns_na = '70%-80%'
+			elif 0.8 < i[1]['ert'] / i[1]['et'] >= 0.9:
+				ns_na = '80%-90%'
+			elif 0.9 < i[1]['ert'] / i[1]['et'] >= 1:
+				ns_na = '90%-100%'
+			elif 1 < i[1]['ert'] / i[1]['et']:
+				ns_na = '> 100%'
 			else:
-				if 0 < i[1]['ert'] / i[1]['et'] >= 0.1:
-					ns_na = '0%-10%'
-				elif 0.1 < i[1]['ert'] / i[1]['et'] >= 0.2:
-					ns_na = '10%-20%'
-				elif 0.2 < i[1]['ert'] / i[1]['et'] >= 0.3:
-					ns_na = '20%-30%'
-				elif 0.3 < i[1]['ert'] / i[1]['et'] >= 0.4:
-					ns_na = '30%-40%'
-				elif 0.4 < i[1]['ert'] / i[1]['et'] >= 0.5:
-					ns_na = '40%-50%'
-				elif 0.5 < i[1]['ert'] / i[1]['et'] >= 0.6:
-					ns_na = '50%-60%'
-				elif 0.6 < i[1]['ert'] / i[1]['et'] >= 0.7:
-					ns_na = '60%-70%'
-				elif 0.7 < i[1]['ert'] / i[1]['et'] >= 0.8:
-					ns_na = '70%-80%'
-				elif 0.8 < i[1]['ert'] / i[1]['et'] >= 0.9:
-					ns_na = '80%-90%'
-				else:
-					ns_na = '90%-100%'
+				ns_na = 'null'
+				
 			if ns_na not in sn_city['ert'].keys():
 				sn_city['ert'][ns_na] = con
 			else:
-				ct = sn_city['psc'][ns_na]
+				ct = sn_city['ert'][ns_na]
 				sn_city['ert'].update({ns_na: ct + 1})
 
-			if i[1]['st'] == 0:
-				ns_na = 'null'
+			if 0 <= i[1]['st'] / i[1]['pt'] >= 0.1:
+				ns_na = '0%-10%'
+			elif 0.1 < i[1]['st'] / i[1]['pt'] >= 0.2:
+				ns_na = '10%-20%'
+			elif 0.2 < i[1]['st'] / i[1]['pt'] >= 0.3:
+				ns_na = '20%-30%'
+			elif 0.3 < i[1]['st'] / i[1]['pt'] >= 0.4:
+				ns_na = '30%-40%'
+			elif 0.4 < i[1]['st'] / i[1]['pt'] >= 0.5:
+				ns_na = '40%-50%'
+			elif 0.5 < i[1]['st'] / i[1]['pt'] >= 0.6:
+				ns_na = '50%-60%'
+			elif 0.6 < i[1]['st'] / i[1]['pt'] >= 0.7:
+				ns_na = '60%-70%'
+			elif 0.7 < i[1]['st'] / i[1]['pt'] >= 0.8:
+				ns_na = '70%-80%'
+			elif 0.8 < i[1]['st'] / i[1]['pt'] >= 0.9:
+				ns_na = '80%-90%'
+			elif 0.9 < i[1]['st'] / i[1]['pt'] >= 1:
+				ns_na = '90%-100%'
+			elif 1 < i[1]['st'] / i[1]['pt']:
+				ns_na = '> 100%'
 			else:
-				if 0 < i[1]['st'] / i[1]['pt'] >= 0.1:
-					ns_na = '0%-10%'
-				elif 0.1 < i[1]['st'] / i[1]['pt'] >= 0.2:
-					ns_na = '10%-20%'
-				elif 0.2 < i[1]['st'] / i[1]['pt'] >= 0.3:
-					ns_na = '20%-30%'
-				elif 0.3 < i[1]['st'] / i[1]['pt'] >= 0.4:
-					ns_na = '30%-40%'
-				elif 0.4 < i[1]['st'] / i[1]['pt'] >= 0.5:
-					ns_na = '40%-50%'
-				elif 0.5 < i[1]['st'] / i[1]['pt'] >= 0.6:
-					ns_na = '50%-60%'
-				elif 0.6 < i[1]['st'] / i[1]['pt'] >= 0.7:
-					ns_na = '60%-70%'
-				elif 0.7 < i[1]['st'] / i[1]['pt'] >= 0.8:
-					ns_na = '70%-80%'
-				elif 0.8 < i[1]['st'] / i[1]['pt'] >= 0.9:
-					ns_na = '80%-90%'
-				else:
-					ns_na = '90%-100%'
-
+				ns_na = 'null'
+				
 			if ns_na not in sn_city['st'].keys():
 				sn_city['st'][ns_na] = con
 			else:
